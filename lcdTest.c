@@ -17,13 +17,13 @@ int main(void)
 		printf("type line one\n>>>");
 		fgets(LineBuff, 17, stdin);
 		LineBuff[strlen(LineBuff)-1] = '\0';//cull new line
-		clrLines(LCD, 1, 0);
+		//clrLines(LCD, 1, 0);
 		lcdDisplayLine(LCD, LineBuff, LINE_ONE);
 		
 		printf("type line two\n>>>");
 		fgets(LineBuff, 17, stdin);
 		LineBuff[strlen(LineBuff)-1] = '\0';//cull new line
-		clrLines(LCD, 0, 1);
+		//clrLines(LCD, 0, 1);
 		lcdDisplayLine(LCD, LineBuff, LINE_TWO);
 			
 	}

@@ -55,6 +55,7 @@ int lcdDisplayLine(struct i2c_handle LCD, char * Line, uint8_t LineNum)
 	int i;
 	char WriteBuf[17] = "                ";//16 spaces
 	
+	lcdWrite(LCD, LineNum, LCD_CMD);
 	
 	
 	Length = strlen(Line);
@@ -62,18 +63,25 @@ int lcdDisplayLine(struct i2c_handle LCD, char * Line, uint8_t LineNum)
 	{
 		Length = 16; //culls to 16 characters
 	}
+	//Length -= 4;
 	
 	strncpy(WriteBuf, Line, Length);
-	printf("%s\n", WriteBuf);
+	printf("%sa\n", WriteBuf);
+	printf("number of chars copied is %d\n", Length);
 	
 	
-	for(i = 0; i < Length; i++ )
+	for(i = 0; i < 16; i++ )
 	{
-		lcdWrite(LCD, Line[i], LCD_WR);
+		lcdWrite(LCD, WriteBuf[i], LCD_WR);
 	}
 	
 	return Length;
 }
+
+/*void lcdDisplayBoth(LCD, char * Line1, char * Line2)
+{
+	
+}*/
 
 void clrLines(struct i2c_handle LCD, int Line1, int Line2)
 {
@@ -81,10 +89,12 @@ void clrLines(struct i2c_handle LCD, int Line1, int Line2)
 	if(Line1)
 	{
 		lcdWrite(LCD, CLR_LINE_ONE, LCD_CMD);
+		printf("clearing line 1\n");
 	}
 	
 	if(Line2)
 	{
 		lcdWrite(LCD, CLR_LINE_TWO, LCD_CMD);
+		printf("clearing line 2\n");
 	}
 }
