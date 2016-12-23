@@ -53,11 +53,19 @@ int lcdDisplayLine(struct i2c_handle LCD, char * Line, uint8_t LineNum)
 {
 	int Length;
 	int i;
+	char WriteBuf[17] = "                ";//16 spaces
+	
+	
+	
 	Length = strlen(Line);
 	if(Length > 16)
 	{
 		Length = 16; //culls to 16 characters
 	}
+	
+	strncpy(WriteBuf, Line, Length);
+	printf("%s\n", WriteBuf);
+	
 	
 	for(i = 0; i < Length; i++ )
 	{
