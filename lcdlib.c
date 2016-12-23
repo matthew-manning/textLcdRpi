@@ -63,7 +63,6 @@ int lcdDisplayLine(struct i2c_handle LCD, char * Line, uint8_t LineNum)
 	{
 		Length = 16; //culls to 16 characters
 	}
-	//Length -= 4;
 	
 	strncpy(WriteBuf, Line, Length);
 	printf("%sa\n", WriteBuf);
@@ -73,6 +72,7 @@ int lcdDisplayLine(struct i2c_handle LCD, char * Line, uint8_t LineNum)
 	for(i = 0; i < 16; i++ )
 	{
 		lcdWrite(LCD, WriteBuf[i], LCD_WR);
+		printf("i is %d\n", i);
 	}
 	
 	return Length;
